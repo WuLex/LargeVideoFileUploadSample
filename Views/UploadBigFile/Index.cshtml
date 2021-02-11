@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!--上传视频-->
+<div>
+    <div>
+        <div>
+            <div>
+                <span class="">上传视频</span>
+            </div>
+            <input id="uploadvideofile" type="file" accept="video/mp4,video/quicktime" class="up-video" />
+        </div>
+    </div>
+    <div id="videoplayer" style="display: none"></div>
+    <div id="videooutput"></div>
+    <div>
+        <p style="color: #797979; margin-top: 5px; font-size: 12px;">视频格式必须为: mp4或mov。视频时长须在15秒以内，超出时长系统将自动截取前15秒内容。</p>
+    </div>
+</div>
+
+<script src="~/Scripts/ajax.1.5.2.js"></script>
+<!--传视频相关-->
+<script type="text/javascript">
+    $('#uploadvideofile').change(function() {
+        var file, videoURL, windowURL;
+        var filemaxsize = 1024 * 1024 * 20; //200M
+        if (fileValid(this, filemaxsize, 'video')) {
+            file = this.files[0];
+            try {
+                var temp = ajax.upload_big(
+                    "UpLoadBigFile/UploadVideo?opration=2222", //文件上传地址
+                    "#uploadvideofile", //input = file 选择器
+                    1024 * 1024, //切割文件大小
+                    "*", //文件限制类型 mime类型
+                    function(index) { //上传成功事件
+                        //console.log("slice [ " + index + "] uploaded")
+                    },
+                    function(index, length) { //上传进度事件
+                        //console.log(index + "/" + length);
+                        //var ratio = (index / length) * 100.00 | 0.00;
+                        //var progress = $(".progress > div");
+                        //progress.css("width", ratio + "%");
+                        //progress.attr("aria-valuenow", index);
+                        //progress.attr("aria-valuemax", length);
+                        //progress.children("span").text("" + ratio + "%");
+                    },
+                    function(index, length) { //超时处理事件
+                        console.log(index + "/" + length);
+                    }
+                );
+            } catch (e) {
+                console.log(e.name + " " + e.message);
+            }
+            videoURL = null;
+            windowURL = window.URL || window.webkitURL;
+            videoURL = windowURL.createObjectURL(file);
+            $('#videoplayer').html('<video src="' + videoURL + '" controls="controls"></video>');
+            setTimeout(function() { createIMG(); }, 800);
+        }
+    });
+
+    //验证上传文件大小和类型
+    /**
+     *
+     * param {this} value_ [获取input对象，一般为this]
+     * param {[number]} size_ [文件限制的大小，单位为kb]
+     * param {[string]} type_ [文件类别]
+     * param {[function]} callback [验证通过的回调]
+     */
+    function fileValid(value_, size_, type_, callback) {
+        var file = value_.files[0];
+        var fileSize = (file.size / 1024).toFixed(0); //文件大小
+        var fileType = value_.value.substring(value_.value.lastIndexOf(".")); //文件类型
+
+        if (fileSize > size_) {
+            alert('视频过大,请选择小于200MB的视频！');
+            return false;
+        }
+        switch (type_) {
+        case 'video':
+            if (!fileType.match(/.mp4|.mov/i)) {
+                alert('请上传正确格式的视频!');
+                return false;
+            }
+            break;
+        default:
+            alert('参数设置不正确！');
+            return false;
+            break;
+        }
+        return true;
+    }
+
+    var createIMG = function() {
+        var scale = 0.25,
+            video = $('#videoplayer').find('video')[0],
+            canvas = document.createElement("canvas"),
+            canvasFill = canvas.getContext('2d');
+        canvas.width = video.videoWidth * scale;
+        canvas.height = video.videoHeight * scale;
+        canvasFill.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var src = canvas.toDataURL("image/jpeg");
+        $('#videooutput').html('<img id="imgSmallView" src="' + src + '" alt="预览图" />');
+    }
+</script>
+
+<script>
+    (function () {
+        //$("#uploadvideofile").change(function () {
+        //    var temp = ajax.upload_big(
+        //        "AjaxHandlers/UploadVideoHandler.ashx", //文件上传地址
+        //        "#uploadvideofile", //input = file 选择器
+        //        1024 * 1024, //切割文件大小
+        //        "*", //文件限制类型 mime类型
+        //        function(index) { //上传成功事件
+        //            //console.log("slice [ " + index + "] uploaded")
+        //        },
+        //        function(index, length) { //上传进度事件
+        //            //console.log(index + "/" + length);
+        //            //var ratio = (index / length) * 100.00 | 0.00;
+        //            //var progress = $(".progress > div");
+        //            //progress.css("width", ratio + "%");
+        //            //progress.attr("aria-valuenow", index);
+        //            //progress.attr("aria-valuemax", length);
+        //            //progress.children("span").text("" + ratio + "%");
+        //        },
+        //        function(index, length) { //超时处理事件
+        //            console.log(index + "/" + length);
+        //        }
+        //    );
+        //    console.log(temp);
+        //});
+    })();
+</script>
