@@ -11,25 +11,11 @@ namespace VideoDemo.Controllers
 {
     public class UploadBigFileController : Controller
     {
-        // GET: UpLoadBigFileController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: UpLoadBigFileController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UpLoadBigFileController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UpLoadBigFileController/UploadVideo
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public int UploadVideo([FromForm] VideoFileModel filemodel, [FromQuery]string opration)
@@ -46,6 +32,17 @@ namespace VideoDemo.Controllers
                 Console.Write(e.ToString());
                 return -1;
             }
+        }
+
+
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        public ActionResult Create()
+        {
+            return View();
         }
 
         // GET: UpLoadBigFileController/Edit/5

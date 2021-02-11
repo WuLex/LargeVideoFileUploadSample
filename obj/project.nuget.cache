@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ITSYIoYtfhMgwCrHa1gxjG+W/gdJkv5MwmTE8uHXagHE9c0h/m918A03DuFWcfgVcAJ1LmZFcgDYQlIAAMzM0w==",
+  "dgSpecHash": "AGnPQ1YE88FFp9jORuZ6N9Fup8xNR4WNThKBgTFZVRRMQC6NEb0+vYSD6uoEJAOnQZdQ+0mVMmjuiLMMlNEVWA==",
   "success": true,
-  "projectFilePath": "E:\\workproject\\NetCoreWebDemo\\VideoDemo\\VideoDemo.csproj",
+  "projectFilePath": "E:\\学习sp\\VideoDemo\\VideoDemo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\acer\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",

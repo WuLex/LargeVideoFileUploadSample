@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\workproject\\NetCoreWebDemo\\VideoDemo\\VideoDemo.csproj": {}
+    "E:\\学习sp\\VideoDemo\\VideoDemo.csproj": {}
   },
   "projects": {
-    "E:\\workproject\\NetCoreWebDemo\\VideoDemo\\VideoDemo.csproj": {
+    "E:\\学习sp\\VideoDemo\\VideoDemo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\workproject\\NetCoreWebDemo\\VideoDemo\\VideoDemo.csproj",
+        "projectUniqueName": "E:\\学习sp\\VideoDemo\\VideoDemo.csproj",
         "projectName": "VideoDemo",
-        "projectPath": "E:\\workproject\\NetCoreWebDemo\\VideoDemo\\VideoDemo.csproj",
+        "projectPath": "E:\\学习sp\\VideoDemo\\VideoDemo.csproj",
         "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-        "outputPath": "E:\\workproject\\NetCoreWebDemo\\VideoDemo\\obj\\",
+        "outputPath": "E:\\学习sp\\VideoDemo\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
