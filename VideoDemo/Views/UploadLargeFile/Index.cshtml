@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>大文件短点续传示例</title>
+    <meta charset="utf-8" />
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/plupload/3.1.2/plupload.full.min.js"></script>
+    <style>
+        #uploader {
+            border: 1px solid #ccc;
+            height: 200px;
+            width: 300px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="uploader">
+        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+    </div>
+    <script>
+        $(function () {
+            var uploader = new plupload.Uploader({
+                runtimes: 'html5,flash,silverlight',
+                browse_button: 'uploader',
+                url: '/UploadLargeFile/UploadChunk',
+                chunk_size: '1mb',
+                max_retries: 3,
+                unique_names: true,
+                multipart: true,
+                multipart_params: {
+                    filename: 'largefile.mp4'
+                },
+                flash_swf_url: 'https://cdn.staticfile.org/plupload/3.1.2/Moxie.swf',
+                silverlight_xap_url: 'https://cdn.staticfile.org/plupload/3.1.2/Moxie.xap',
+            });
+
+            uploader.init();
+
+            uploader.bind('FilesAdded', function (up, files) {
+                uploader.start();
+            });
+
+            uploader.bind('ChunkUploaded', function (up, file, response) {
+                console.log('Chunk ' + file.loaded + ' of ' + file.size + ' uploaded successfully.');
+            });
+
+            uploader.bind('FileUploaded', function (up, file, response) {
+                console.log('File uploaded successfully.');
+            });
+
+            uploader.bind('Error', function (up, err) {
+                console.error('Error: ' + err.message);
+            });
+        });
+    </script>
+</body>
+</html>
