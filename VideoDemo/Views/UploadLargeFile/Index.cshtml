@@ -24,11 +24,13 @@
     </div>
     <script>
         $(function () {
+
+            // 初始化 Plupload
             var uploader = new plupload.Uploader({
                 runtimes: 'html5,flash,silverlight',
                 browse_button: 'uploader',
                 url: '/UploadLargeFile/UploadChunk',
-                chunk_size: '1mb',
+                chunk_size: '1mb',// 将文件分成 1MB 的块进行上传
                 max_retries: 3,
                 unique_names: true,
                 multipart: true,
@@ -40,7 +42,8 @@
             });
 
             uploader.init();
-
+          
+            // 文件添加到队列后的处理函数
             uploader.bind('FilesAdded', function (up, files) {
                 uploader.start();
             });

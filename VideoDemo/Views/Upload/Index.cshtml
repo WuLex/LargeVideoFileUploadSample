@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plupload 文件上传</title>
+    <style type="text/css">
+        #file-progress-wrapper {
+            width: 100%;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #file-progress {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        #file-progress-text {
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Plupload 文件上传</h1>
+    <div id="filelist" style="display: none;">
+        <div id="file-progress-wrapper">
+            <div id="file-progress"></div>
+            <div id="file-progress-text"></div>
+        </div>
+    </div>
+    <div id="uploader">
+        <p>
+            <a id="pickfiles" href="javascript:;">选择文件</a>
+            <a id="uploadfiles" href="javascript:;">上传文件</a>
+        </p>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/plupload/3.1.2/plupload.full.min.js"></script>
+    <script type="text/javascript">
+        var uploader = new plupload.Uploader({
+            runtimes: 'html5',
+            browse_button: 'pickfiles',
+            url: '/Upload/Upload',
+            chunk_size: '2mb', // 将文件分成 1MB 的块进行上传
+            init: {
+                // 文件添加到队列后的处理函数
+                FilesAdded: function (up, files) {
+                    // 显示上传进度条
+                    document.getElementById('filelist').style.display = 'block';
+                    // 开始上传
+                    uploader.start();
+                },
+                // 每个块上传成功后的处理函数
+                //ChunkUploaded: function (up, file, info) {
+                //    // 后端返回的数据
+                //    var response = JSON.parse(info.response);
+                //    // 如果上传成功，则显示上传的进度
+                //    if (response.status == 'OK') {
+                //        var percent = up.total.loaded/up.total.size*100;
+                //        document.getElementById('file-progress').style.width = percent + '%';
+                //        document.getElementById('file-progress-text').innerHTML = percent.toFixed(2) + '%';
+                //    }
+                //}
+                //,
+                 UploadProgress: function (up, file) {
+                    var percent = up.total.percent;
+                    document.getElementById('file-progress').style.width = percent + '%';
+                    document.getElementById('file-progress-text').innerHTML = percent.toFixed(2) + '%';
+                }
+
+            }
+        });
+
+        // 开始上传
+        uploader.init();
+    </script>
+</body>
+</html>

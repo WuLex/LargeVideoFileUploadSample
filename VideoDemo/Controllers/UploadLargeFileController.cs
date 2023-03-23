@@ -6,6 +6,10 @@ using VideoDemo.Models;
 
 namespace VideoDemo.Controllers
 {
+
+    /// <summary>
+    /// 断点续传示例1
+    /// </summary>
     public class UploadLargeFileController : Controller
     {
         private readonly ILogger<UploadLargeFileController> _logger;
@@ -23,15 +27,18 @@ namespace VideoDemo.Controllers
         [HttpPost]
         public IActionResult UploadChunk([FromForm] PlUploadUploadModel model)
         {
+            // 上传的块文件所在的目录
             var chunkDirectory = Path.Combine(Path.GetTempPath(), "plupload", model.Name);
 
+            // 如果不存在上传的块文件目录，则创建目录
             if (!Directory.Exists(chunkDirectory))
             {
                 Directory.CreateDirectory(chunkDirectory);
             }
 
+            // 块文件路径拼接
             var chunkPath = Path.Combine(chunkDirectory, model.Chunk.ToString());
-         
+
             // 在拷贝文件内容之前验证上传文件的类型和大小是否符合要求
             if (!UploadHelper.IsAllowedFileType(model.File.FileName))
             {
@@ -42,7 +49,7 @@ namespace VideoDemo.Controllers
             //{
             //    return BadRequest("File size exceeded maximum limit.");
             //}
-           
+
             // 将上传的文件的内容写入到指定的文件流中
             using (var stream = new FileStream(chunkPath, FileMode.Create, FileAccess.Write))
             {
@@ -63,9 +70,13 @@ namespace VideoDemo.Controllers
         [HttpPost]
         public IActionResult UploadFile([FromForm] PlUploadCompleteModel model)
         {
+            // 上传的块文件所在的目录
             var chunkDirectory = Path.Combine(Path.GetTempPath(), "plupload", model.Name);
+
+            // 合并后的文件路径
             var filePath = Path.Combine(Path.GetTempPath(), "plupload", model.Name);
 
+            // 如果不存在上传的块文件，则返回错误响应
             if (!Directory.Exists(chunkDirectory))
             {
                 return BadRequest("Chunks not found.");

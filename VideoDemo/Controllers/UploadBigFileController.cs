@@ -6,6 +6,10 @@ using VideoDemo.Models;
 
 namespace VideoDemo.Controllers
 {
+
+    /// <summary>
+    /// 截取15秒视频
+    /// </summary>
     public class UploadBigFileController : Controller
     {
         public ActionResult Index()
