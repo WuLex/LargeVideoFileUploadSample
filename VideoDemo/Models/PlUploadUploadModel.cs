@@ -7,7 +7,7 @@ namespace VideoDemo.Models
         /// <summary>
         /// 上传的文件名
         /// </summary>
-        public string Name { get; set; }
+        public string FileName { get; set; }
 
         /// <summary>
         /// 当前块的索引
@@ -17,12 +17,12 @@ namespace VideoDemo.Models
         /// <summary>
         /// 文件被分割成的总块数
         /// </summary>
-        public int TotalChunks { get; set; }
+        public int Chunks { get; set; }
 
         /// <summary>
         /// 上传的文件大小
         /// </summary>
-        public long Size { get; set; }
+        //public long Size { get; set; }
 
         /// <summary>
         /// 上传的文件

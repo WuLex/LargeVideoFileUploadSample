@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +23,15 @@ namespace VideoDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            // 添加MVC服务
             services.AddControllersWithViews();
+
+            // 配置文件上传相关选项
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 104857600; // 设置最大上传文件大小（这里设置为100MB）
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

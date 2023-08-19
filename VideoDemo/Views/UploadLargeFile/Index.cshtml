@@ -8,7 +8,7 @@
     <title>大文件短点续传示例</title>
     <meta charset="utf-8" />
     <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/plupload/3.1.2/plupload.full.min.js"></script>
+    <script src="~/lib/plupload3.1.5/js/plupload.full.min.js"></script>
     <style>
         #uploader {
             border: 1px solid #ccc;
@@ -19,8 +19,11 @@
     </style>
 </head>
 <body>
+
+    <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+    <br />
     <div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+       @* <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>*@
     </div>
     <script>
         $(function () {
@@ -37,12 +40,12 @@
                 multipart_params: {
                     filename: 'largefile.mp4'
                 },
-                flash_swf_url: 'https://cdn.staticfile.org/plupload/3.1.2/Moxie.swf',
-                silverlight_xap_url: 'https://cdn.staticfile.org/plupload/3.1.2/Moxie.xap',
+                flash_swf_url: '~/lib/plupload3.1.5/js/moxie.swf',
+                silverlight_xap_url: '~/lib/plupload3.1.5/js/moxie.xap',
             });
 
             uploader.init();
-          
+
             // 文件添加到队列后的处理函数
             uploader.bind('FilesAdded', function (up, files) {
                 uploader.start();
@@ -59,6 +62,9 @@
             uploader.bind('Error', function (up, err) {
                 console.error('Error: ' + err.message);
             });
+
+         
+          
         });
     </script>
 </body>

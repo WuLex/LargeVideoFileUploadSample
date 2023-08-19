@@ -25,10 +25,10 @@ namespace VideoDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadChunk([FromForm] PlUploadUploadModel model)
+        public IActionResult UploadChunk(PlUploadUploadModel model)
         {
             // 上传的块文件所在的目录
-            var chunkDirectory = Path.Combine(Path.GetTempPath(), "plupload", model.Name);
+            var chunkDirectory = Path.Combine(Path.GetTempPath(), "plupload", model.FileName);
 
             // 如果不存在上传的块文件目录，则创建目录
             if (!Directory.Exists(chunkDirectory))
@@ -62,7 +62,7 @@ namespace VideoDemo.Controllers
             //    UploadHelper.CompressFile(filePath);
             //}
 
-            _logger.LogInformation($"Chunk {model.Chunk} of {model.TotalChunks} uploaded successfully.");
+            _logger.LogInformation($"Chunk {model.Chunk} of {model.Chunks} uploaded successfully.");
 
             return Json(new { status = "OK" });
         }
