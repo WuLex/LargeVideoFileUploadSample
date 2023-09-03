@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>YouTube视频分辨率选择</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/layui/2.6.8/css/layui.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-xs12 layui-col-sm8 layui-col-sm-offset2">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <form class="layui-form" lay-filter="videoForm">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">分辨率</label>
+                                <div class="layui-input-block">
+                                    <select name="resolution" lay-filter="resolution">
+                                        <option value="">请选择</option>
+                                        <option value="1080p">1080p</option>
+                                        <option value="720p">720p</option>
+                                        <option value="480p">480p</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="submitBtn">获取视频</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-hide" id="videoUrlContainer">
+                            <label class="layui-form-label">视频链接</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="videoUrl" readonly class="layui-input" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-hide" id="videoContainer">
+                            <video id="videoPlayer" controls></video>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/layui/2.6.8/layui.min.js"></script>
+    <script>
+        // 初始化LayUI表单
+        layui.use(['form'], function () {
+            var form = layui.form;
+
+            // 监听分辨率选择
+            form.on('select(resolution)', function (data) {
+                // 清空视频链接显示
+                $('#videoUrl').val('');
+                $('#videoUrlContainer').addClass('layui-hide');
+            });
+
+            // 监听获取视频按钮点击事件
+            form.on('submit(submitBtn)', function () {
+                // 获取分辨率选择的值
+                var resolution = $('select[name="resolution"]').val();
+
+                if (resolution) {
+                    // 发起Ajax请求后端获取视频链接
+                    $.post('/DifferentResolution/GetVideo', { resolution: resolution }, function (res) {
+                        if (res.url) {
+                            // 显示视频链接
+                            $('#videoUrl').val(res.url);
+                            $('#videoUrlContainer').removeClass('layui-hide');
+
+                            //显示视频播放器
+                            var videoPlayer = $('#videoPlayer')[0];
+                            videoPlayer.src = res.url;
+                            videoPlayer.load();
+                            videoPlayer.play();
+                            $('#videoContainer').removeClass('layui-hide');
+
+
+                        } else {
+                            layer.msg('获取视频失败');
+                        }
+                    });
+                }
+
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

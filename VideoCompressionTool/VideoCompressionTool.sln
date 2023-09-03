@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoCompressionTool", "VideoCompressionTool\VideoCompressionTool.csproj", "{0464C234-2B3E-4ADB-8BD2-1488F9450902}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoCompressionDemo", "VideoCompressionDemo\VideoCompressionDemo.csproj", "{DC7C7A0E-9337-4699-8F0D-651CAA5AA6A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0464C234-2B3E-4ADB-8BD2-1488F9450902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0464C234-2B3E-4ADB-8BD2-1488F9450902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0464C234-2B3E-4ADB-8BD2-1488F9450902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0464C234-2B3E-4ADB-8BD2-1488F9450902}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7C7A0E-9337-4699-8F0D-651CAA5AA6A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7C7A0E-9337-4699-8F0D-651CAA5AA6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7C7A0E-9337-4699-8F0D-651CAA5AA6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7C7A0E-9337-4699-8F0D-651CAA5AA6A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50490B82-B203-4095-B09D-EF50060387D1}
+	EndGlobalSection
+EndGlobal
